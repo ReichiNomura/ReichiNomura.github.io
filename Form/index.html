@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rich Text Editor</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+</head>
+
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="app-container">
+        <header class="editor-header">
+            <div class="brand">
+                <span class="material-icons-round">edit_note</span>
+                <h1>FlowEditor</h1>
+            </div>
+            <div class="status-bar" id="status-bar">保存済み</div>
+        </header>
+
+        <main class="editor-main">
+            <div class="toolbar glass-panel">
+                <div class="toolbar-group">
+                    <button class="tool-btn" data-command="bold" title="太字 (Ctrl+B)">
+                        <span class="material-icons-round">format_bold</span>
+                    </button>
+                    <button class="tool-btn" data-command="italic" title="斜体 (Ctrl+I)">
+                        <span class="material-icons-round">format_italic</span>
+                    </button>
+                    <button class="tool-btn" data-command="underline" title="下線 (Ctrl+U)">
+                        <span class="material-icons-round">format_underlined</span>
+                    </button>
+                    <button class="tool-btn" data-command="strikeThrough" title="取り消し線">
+                        <span class="material-icons-round">strikethrough_s</span>
+                    </button>
+                </div>
+
+                <div class="separator"></div>
+
+                <div class="toolbar-group">
+                    <button class="tool-btn" data-command="justifyLeft" title="左揃え">
+                        <span class="material-icons-round">format_align_left</span>
+                    </button>
+                    <button class="tool-btn" data-command="justifyCenter" title="中央揃え">
+                        <span class="material-icons-round">format_align_center</span>
+                    </button>
+                    <button class="tool-btn" data-command="justifyRight" title="右揃え">
+                        <span class="material-icons-round">format_align_right</span>
+                    </button>
+                </div>
+
+                <div class="separator"></div>
+
+                <div class="toolbar-group">
+                    <button class="tool-btn" data-command="insertUnorderedList" title="箇条書き">
+                        <span class="material-icons-round">format_list_bulleted</span>
+                    </button>
+                    <button class="tool-btn" data-command="insertOrderedList" title="番号付きリスト">
+                        <span class="material-icons-round">format_list_numbered</span>
+                    </button>
+                </div>
+
+                <div class="separator"></div>
+
+                <div class="toolbar-group">
+                    <button class="tool-btn" data-command="undo" title="元に戻す (Ctrl+Z)">
+                        <span class="material-icons-round">undo</span>
+                    </button>
+                    <button class="tool-btn" data-command="redo" title="やり直し (Ctrl+Y)">
+                        <span class="material-icons-round">redo</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="editor-container glass-panel">
+                <div id="editor" class="editor-content" contenteditable="true" spellcheck="false"
+                    placeholder="ここにテキストを入力...">
+                    <p><br></p>
+                </div>
+            </div>
+        </main>
+
+        <footer class="editor-footer">
+            <div class="word-count">0 単語</div>
+            <div class="char-count">0 文字</div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
