@@ -1,10 +1,10 @@
 :root {
-    --bg-color: #0f172a;
+    --bg-color: #fff;
     --text-color: #f8fafc;
     --card-bg: rgba(30, 41, 59, 0.7);
     --card-border: rgba(148, 163, 184, 0.1);
-    --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-    --secondary-gradient: linear-gradient(135deg, #3b82f6 0%, #2dd4bf 100%);
+    --primary-gradient: linear-gradient(-90deg, #ffffff5c 0%, #3b0707 100%);
+    --secondary-gradient: linear-gradient(135deg, #3b82f6 0%, #3a8d83 100%);
     --hover-transform: translateY(-5px);
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --font-main: 'Inter', system-ui, -apple-system, sans-serif;
@@ -69,7 +69,7 @@ h1 {
 
 .subtitle {
     font-size: 1.25rem;
-    color: #94a3b8;
+    color: #1f62bf99;
     max-width: 600px;
     margin: 0 auto;
 }
@@ -171,7 +171,7 @@ footer {
 
 .user-email {
     font-size: 0.9rem;
-    color: #cbd5e1;
+    color: #71a5e3;
     background: rgba(255, 255, 255, 0.1);
     padding: 0.25rem 0.75rem;
     border-radius: 9999px;
@@ -179,8 +179,8 @@ footer {
 
 .btn-logout {
     background: transparent;
-    border: 1px solid rgba(148, 163, 184, 0.3);
-    color: #cbd5e1;
+    border: 1px solid rgb(148 163 184 / 80%);
+    color: #70777f;
     cursor: pointer;
     padding: 0.25rem 0.75rem;
     border-radius: 0.5rem;
@@ -198,7 +198,7 @@ footer {
     max-width: 400px;
     width: 100%;
     margin: 0 auto;
-    background: var(--card-bg);
+    background: rgb(180 211 251 / 70%);
     border: 1px solid var(--card-border);
     border-radius: 1.5rem;
     padding: 2.5rem;
@@ -230,7 +230,7 @@ footer {
 .form-input {
     width: 100%;
     padding: 0.75rem 1rem;
-    background: rgba(15, 23, 42, 0.6);
+    background: rgb(15 23 42 / 13%);
     border: 1px solid rgba(148, 163, 184, 0.2);
     border-radius: 0.75rem;
     color: #fff;
