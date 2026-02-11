@@ -57,6 +57,11 @@ document.getElementById('msLogin').onclick = () => {
     signInWithPopup(auth, provider).catch(err => alert(err.message));
 };
 
+document.getElementById('appleLogin').onclick = () => {
+    const provider = new OAuthProvider('apple.com');
+    signInWithPopup(auth, provider).catch(err => alert(err.message));
+};
+
 document.getElementById('emailSignUp').onclick = () => {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
