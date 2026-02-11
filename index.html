@@ -1,11 +1,163 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
-    <title>My GitHub Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Reichi Nomura's Portfolio - Othello Game and Rich Text Editor">
+    <title>Reichi Nomura's Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <h1>こんにちは！GitHub PagesでWebサイトを公開しました。</h1>
-    <p>このページは無料でSSL化（HTTPS）されています。</p>
+    <header>
+        <h1>Reichi Nomura</h1>
+        <p class="subtitle">Web Development Projects & Experiments</p>
+        <div id="userProfile" class="user-profile hidden">
+            <span id="userEmail" class="user-email"></span>
+            <button id="logoutBtn" class="btn-logout">Sign Out</button>
+        </div>
+    </header>
+
+    <main>
+        <!-- Login Container -->
+        <div id="loginContainer" class="login-container">
+            <div class="login-header">
+                <h2>Welcome Back</h2>
+                <p>Please sign in to access projects</p>
+            </div>
+
+            <div class="form-group">
+                <input type="email" id="email" class="form-input" placeholder="Email address">
+            </div>
+            <div class="form-group">
+                <input type="password" id="password" class="form-input" placeholder="Password">
+            </div>
+
+            <button id="emailSignIn" class="btn-primary">Sign In</button>
+            <button id="emailSignUp" class="btn-logout" style="width:100%; margin-bottom:1rem; border:none;">Create
+                Account</button>
+
+            <div class="divider">
+                <span>OR CONTINUE WITH</span>
+            </div>
+
+            <div class="social-login">
+                <button id="googleLogin" class="btn-social">
+                    <span>Google</span>
+                </button>
+                <button id="msLogin" class="btn-social">
+                    <span>Microsoft</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Portal Content (Hidden by default) -->
+        <div id="portalContent" class="portal-grid hidden" style="display: contents;">
+            <a href="./othello/index.html" class="card">
+                <div class="card-icon">● ○</div>
+                <h2>Othello Game</h2>
+                <p>ブラウザで遊べる本格的なオセロゲーム。CPU対戦機能を搭載し、洗練されたUIで戦略的な対戦を楽しめます。</p>
+                <div class="card-arrow">Play Now <span>→</span></div>
+            </a>
+
+            <a href="./Form/index.html" class="card">
+                <div class="card-icon">📝</div>
+                <h2>FlowEditor</h2>
+                <p>シンプルで美しいリッチテキストエディタ。直感的な操作性とモダンなデザインで、スムーズな執筆体験を提供します。</p>
+                <div class="card-arrow">Open Editor <span>→</span></div>
+            </a>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Reichi Nomura. All rights reserved.</p>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import {
+            getAuth,
+            signInWithPopup,
+            GoogleAuthProvider,
+            OAuthProvider,
+            createUserWithEmailAndPassword,
+            signInWithEmailAndPassword,
+            onAuthStateChanged,
+            signOut
+        } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyABqp_3IFVgUo_u1AR2cU6MVMiUT2FLo1s",
+            authDomain: "reichi-000000.firebaseapp.com",
+            projectId: "reichi-000000",
+            storageBucket: "reichi-000000.appspot.com",
+            messagingSenderId: "314742770635",
+            appId: "1:314742770635:web:76588a3b719cf77d52844e"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // DOM Elements
+        const loginContainer = document.getElementById('loginContainer');
+        const portalContent = document.getElementById('portalContent');
+        const userProfile = document.getElementById('userProfile');
+        const userEmailSpan = document.getElementById('userEmail');
+        const logoutBtn = document.getElementById('logoutBtn');
+
+        // Auth State Observer
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // User is signed in
+                loginContainer.classList.add('hidden');
+                portalContent.classList.remove('hidden');
+                userProfile.classList.remove('hidden');
+                userEmailSpan.textContent = user.email;
+            } else {
+                // User is signed out
+                loginContainer.classList.remove('hidden');
+                portalContent.classList.add('hidden');
+                userProfile.classList.add('hidden');
+                userEmailSpan.textContent = '';
+            }
+        });
+
+        // Event Listeners
+        document.getElementById('googleLogin').onclick = () => {
+            signInWithPopup(auth, new GoogleAuthProvider()).catch(err => alert(err.message));
+        };
+
+        document.getElementById('msLogin').onclick = () => {
+            const provider = new OAuthProvider('microsoft.com');
+            signInWithPopup(auth, provider).catch(err => alert(err.message));
+        };
+
+        document.getElementById('emailSignUp').onclick = () => {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            if (!email || !password) return alert("Please enter email and password");
+
+            createUserWithEmailAndPassword(auth, email, password)
+                .then(() => alert("Account created! You are now signed in."))
+                .catch(err => alert(err.message));
+        };
+
+        document.getElementById('emailSignIn').onclick = () => {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            if (!email || !password) return alert("Please enter email and password");
+
+            signInWithEmailAndPassword(auth, email, password)
+                .catch(err => alert("Login failed: " + err.message));
+        };
+
+        logoutBtn.onclick = () => signOut(auth);
+    </script>
 </body>
+
 </html>
