@@ -7,7 +7,9 @@ import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     onAuthStateChanged,
-    signOut
+    signOut,
+    setPersistence,
+    browserLocalPersistence
 } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
 // Firebase Configuration
@@ -22,6 +24,12 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+
+// Persistence Configuration
+setPersistence(auth, browserLocalPersistence)
+    .catch((error) => {
+        console.error("Persistence persistence error:", error);
+    });
 
 // DOM Elements
 const loginContainer = document.getElementById('loginContainer');
